@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from config import config
 from models import FireReachRequest, FireReachResponse
-from agent import run_firereach_agent
+from agent_simple import run_firereach_agent
 
 
 @asynccontextmanager
