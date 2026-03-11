@@ -1,4 +1,5 @@
 """FastAPI main application for FireReach."""
+import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -31,7 +32,7 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -69,10 +70,8 @@ async def launch_firereach(request: FireReachRequest):
     3. Draft and send a personalized email
     """
     try:
-        # Run agent
         result = await run_firereach_agent(request)
         
-        # Build response
         return FireReachResponse(
             status="success" if not result.error else "failed",
             current_step=result.current_step,
@@ -92,6 +91,11 @@ async def launch_firereach(request: FireReachRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# For Vercel serverless
+handler = app
+
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
