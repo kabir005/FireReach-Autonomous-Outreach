@@ -1,7 +1,6 @@
 """FireReach Agent - ReAct pattern with LangGraph orchestration."""
 from typing import TypedDict
 from langgraph.graph import StateGraph, END
-from operator import add
 from typing_extensions import Annotated
 from models import (
     AgentState, Signal, SignalHarvesterInput, ResearchAnalystInput, 
@@ -25,7 +24,7 @@ class GraphState(TypedDict):
     email_body: str
     send_status: str
     message_id: str
-    agent_log: Annotated[list[str], add]
+    agent_log: Annotated[list[str], lambda x, y: x + y]
     current_step: str
     error: str
 
