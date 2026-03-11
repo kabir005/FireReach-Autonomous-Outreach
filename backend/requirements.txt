@@ -1,10 +1,26 @@
+# Core Framework
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 pydantic==2.6.0
 python-dotenv==1.0.0
-httpx==0.26.0
 python-multipart==0.0.6
+
+# HTTP Client
+httpx==0.26.0
+
+# AI & LLM
 groq==0.4.2
+
+# Search API
 tavily-python==0.3.0
+
+# Agent Framework
 typing-extensions==4.9.0
+jsonpatch==1.33
+langsmith==0.1.147
+packaging==23.2
+pyyaml==6.0.1
+tenacity==8.2.3
+langchain-core==1.2.18
+langgraph-checkpoint==2.0.10
 langgraph==1.1.0
